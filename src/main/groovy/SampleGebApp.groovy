@@ -1,28 +1,27 @@
 import geb.Browser
 import geb.Page
-import geb.spock.GebSpec
 
 def browser = new Browser()
 
-class TestPage extends Page {
-    static url = "http://www.actier.co.jp/"
+class GooglePage extends Page {
+    static url = "https://www.google.co.jp/"
 
     static content = {
-        title = {
-            $("title")
-        }
+//        textBox = { $("input", id: "lst-ib") }
     }
 
     static at = {
-        title == 'トップページ｜株式会社アクティア'
+        title == 'Google'
+//        title == 'hogehoge'
+    }
+
+    @Override
+    void onLoad(final Page previousPage) {
+        $("#lst-ib").value("hogehoge")
     }
 }
 
 browser.drive {
-    to TestPage
+    to GooglePage
     Thread.sleep(2000)
 }.quit()
-
-class TestPageSpec extends GebSpec {
-
-}
